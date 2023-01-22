@@ -8,7 +8,7 @@ public class WeaponChange : MonoBehaviour
     public MeshRenderer[] ak47;
     public MeshRenderer[] m4a1;
 
-    public Animation animation;
+    [SerializeField] Animation _animation;
 
     public bool isHaveM4A1 = false;
 
@@ -17,7 +17,7 @@ public class WeaponChange : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             isHaveM4A1 = false;
-            animation.Play("draw");
+            _animation.Play("draw");
             spas12.enabled = true;
             for (int i = 0; i < ak47.Length; i++)
                 ak47[i].enabled = false;
@@ -27,7 +27,7 @@ public class WeaponChange : MonoBehaviour
         else if (Input.GetKeyDown(KeyCode.Alpha2))
         {
             isHaveM4A1 = false;
-            animation.Play("draw");
+            _animation.Play("draw");
             spas12.enabled = false;
             for (int i = 0; i < ak47.Length; i++)
                 ak47[i].enabled = true;
@@ -37,7 +37,7 @@ public class WeaponChange : MonoBehaviour
         else if (Input.GetKeyDown(KeyCode.Alpha3))
         {
             isHaveM4A1 = true;
-            animation.Play("draw");
+            _animation.Play("draw");
             spas12.enabled = false;
             for (int i = 0; i < ak47.Length; i++)
                 ak47[i].enabled = false;

@@ -190,8 +190,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 56801792}
-  m_LocalRotation: {x: 0.14342451, y: 0.8054956, z: 0.5324791, w: -0.21696144}
-  m_LocalPosition: {x: -68.70836, y: -21.939087, z: 7.360753}
+  m_LocalRotation: {x: 0.087172285, y: 0.89959055, z: 0.21045254, w: -0.37262255}
+  m_LocalPosition: {x: 12.674486, y: -7.732139, z: 12.674487}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -714,8 +714,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 174938637}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -72.7, y: -3.6600003, z: -1.6}
+  m_LocalRotation: {x: 0.087172285, y: 0.89959055, z: 0.21045254, w: -0.37262255}
+  m_LocalPosition: {x: -17.583317, y: -41.606857, z: 45.53386}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1886,11 +1886,11 @@ MonoBehaviour:
   - {fileID: 1363414105}
   - {fileID: 887946730}
   - {fileID: 1519621900}
-  responTime: 3.35
+  responTime: 4
   killText: {fileID: 511997011}
-  zombieMaxCnt: 100
-  monsterMaxCnt: 100
-  skeletonMaxCnt: 100
+  zombieMaxCnt: 50
+  monsterMaxCnt: 50
+  skeletonMaxCnt: 50
 --- !u!1 &813031748
 GameObject:
   m_ObjectHideFlags: 0

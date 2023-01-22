@@ -348,7 +348,7 @@ MonoBehaviour:
   - {fileID: 1905053983}
   - {fileID: 1905053981}
   - {fileID: 1905053979}
-  animation: {fileID: 1149537306}
+  _animation: {fileID: 1149537306}
   isHaveM4A1: 0
 --- !u!114 &1595173073
 MonoBehaviour:
