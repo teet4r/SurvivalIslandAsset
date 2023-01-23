@@ -4,17 +4,15 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public class BulletCtrl : MonoBehaviour
 {
+    [Min(1f)][SerializeField] float speed = 1000f;
+
     Rigidbody _rigidbody;
     TrailRenderer _trailRenderer;
-
-    public float speed;
 
     void Awake()
     {
         _rigidbody = GetComponent<Rigidbody>();
         _trailRenderer = GetComponent<TrailRenderer>();
-
-        if (speed <= 0f) speed = 100f;
     }
 
     void OnEnable()

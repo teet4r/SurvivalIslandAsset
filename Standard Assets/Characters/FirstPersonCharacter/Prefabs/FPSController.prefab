@@ -306,8 +306,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8997e7c6cfcf29e4db973dbc3c267d93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  combatAni: {fileID: 1149537306}
-  isRunning: 0
+  _combatAnimation: {fileID: 1149537306}
+  _fireCtrl: {fileID: 1595173070}
 --- !u!114 &1595173070
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -784,10 +784,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95c6e8b3fd752b141ab8d096e12b4bb1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  crosshair: {fileID: 1792517696}
   duration: 0.3
   minSize: 0.5
   maxSize: 0.8
-  isGazing: 0
 --- !u!1 &1970909157
 GameObject:
   m_ObjectHideFlags: 0

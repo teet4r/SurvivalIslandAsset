@@ -1,18 +1,18 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class LightChange : MonoBehaviour
 {
-    public Light blueLight;
-    public Light yellowLight;
-    public Light greenLight;
+    public bool IsLighting { get; private set; } = false;
 
-    Coroutine lightOnOff = null;
+    [SerializeField] Light[] lights;
+    [SerializeField][Range(0.1f, 5f)] float _changeTime = 1f;
+    WaitForSeconds _wfsChangeTime = null;
 
-    [SerializeField]
-    [Range(0.1f, 5f)]
-    float changTime;
+    void Awake()
+    {
+        _wfsChangeTime = new WaitForSeconds(_changeTime);
+    }
 
     void Start()
     {
@@ -21,31 +21,32 @@ public class LightChange : MonoBehaviour
 
     void TurnOn()
     {
-        if (lightOnOff == null)
-            lightOnOff = StartCoroutine(LightOnOff());
+        if (IsLighting) return;
+
+        StartCoroutine(LightOnOff());
     }
+
     void TurnOff()
     {
-        if (lightOnOff != null)
-            StopCoroutine(lightOnOff);
+        if (!IsLighting) return;
+
+        IsLighting = false;
     }
 
     IEnumerator LightOnOff()
     {
-        while (true)
+        IsLighting = true;
+        int idx = 0;
+        while (IsLighting)
         {
-            blueLight.enabled = true;
-            yellowLight.enabled = false;
-            greenLight.enabled = false;
-            yield return new WaitForSeconds(changTime);
-            blueLight.enabled = false;
-            yellowLight.enabled = true;
-            greenLight.enabled = false;
-            yield return new WaitForSeconds(changTime);
-            blueLight.enabled = false;
-            yellowLight.enabled = false;
-            greenLight.enabled = true;
-            yield return new WaitForSeconds(changTime);
+            lights[idx].enabled = true;
+            yield return _wfsChangeTime;
+            lights[idx].enabled = false;
+            
+            ++idx;
+            if (idx >= lights.Length)
+                idx = 0;
         }
+        IsLighting = false;
     }
 }

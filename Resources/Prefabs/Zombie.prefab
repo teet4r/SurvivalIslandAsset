@@ -2312,11 +2312,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b2002a807043bd4eb0755a1d9791eb7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animator: {fileID: 3327754687889832613}
-  navMeshAgent: {fileID: 3327754687530370028}
-  thisObjTr: {fileID: 3327754687897572637}
-  traceDist: 15
-  attackDist: 2
+  _animator: {fileID: 3327754687889832613}
+  _navMeshAgent: {fileID: 3327754687530370028}
+  _traceDist: 15
+  _attackDist: 2
 --- !u!114 &3327754687530370025
 MonoBehaviour:
   m_ObjectHideFlags: 0

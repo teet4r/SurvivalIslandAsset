@@ -6,14 +6,10 @@ using UnityEngine.SceneManagement;
 
 public class PlayerDamaged : MonoBehaviour
 {
-    [SerializeField]
-    Image hpBar;
-    [SerializeField]
-    Text hpText;
-    [SerializeField][Range(1, 100000)]
-    int maxHp;
-    [SerializeField]
-    GameObject screenPanel;
+    [SerializeField] Image hpBar;
+    [SerializeField] Text hpText;
+    [SerializeField][Min(1f)] int maxHp;
+    [SerializeField] GameObject screenPanel;
 
     public bool isDie { get; private set; } = false;
     public int curHp { get; private set; }
@@ -21,7 +17,7 @@ public class PlayerDamaged : MonoBehaviour
     void OnEnable()
     {
         curHp = maxHp;
-        hpText.text = curHp.ToString() + " / " + maxHp.ToString();
+        hpText.text = $"{curHp} / {maxHp}";
     }
 
     void OnTriggerEnter(Collider other)
@@ -39,7 +35,7 @@ public class PlayerDamaged : MonoBehaviour
             }
             hpBar.fillAmount = (float)curHp / maxHp;
             hpBar.color = new Color(1 - hpBar.fillAmount, hpBar.fillAmount, 0f);
-            hpText.text = curHp.ToString() + " / " + maxHp.ToString();
+            hpText.text = $"{curHp} / {maxHp}";
         }
     }
 

@@ -10,13 +10,13 @@ public class WeaponChange : MonoBehaviour
 
     [SerializeField] Animation _animation;
 
-    public bool isHaveM4A1 = false;
+    public bool HasM4A1 = false;
 
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
-            isHaveM4A1 = false;
+            HasM4A1 = false;
             _animation.Play("draw");
             spas12.enabled = true;
             for (int i = 0; i < ak47.Length; i++)
@@ -26,7 +26,7 @@ public class WeaponChange : MonoBehaviour
         }
         else if (Input.GetKeyDown(KeyCode.Alpha2))
         {
-            isHaveM4A1 = false;
+            HasM4A1 = false;
             _animation.Play("draw");
             spas12.enabled = false;
             for (int i = 0; i < ak47.Length; i++)
@@ -36,7 +36,7 @@ public class WeaponChange : MonoBehaviour
         }
         else if (Input.GetKeyDown(KeyCode.Alpha3))
         {
-            isHaveM4A1 = true;
+            HasM4A1 = true;
             _animation.Play("draw");
             spas12.enabled = false;
             for (int i = 0; i < ak47.Length; i++)

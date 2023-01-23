@@ -15,16 +15,19 @@ public class FireCtrl : MonoBehaviour
 
     RunningGun runningGun;
     WeaponChange weaponChange;
-    Coroutine reloadDelay;
     int bulletCount = 0;
 
-    [SerializeField]
-    float reloadTime;
+    [SerializeField] float reloadTime;
+    WaitForSeconds _wfsReload0 = null;
+    WaitForSeconds _wfsReload1 = null;
 
     void Awake()
     {
         runningGun = GetComponent<RunningGun>();
         weaponChange = GetComponent<WeaponChange>();
+
+        _wfsReload0 = new WaitForSeconds(reloadTime);
+        _wfsReload1 = new WaitForSeconds(0.8f);
     }
 
     void Update()
@@ -34,7 +37,7 @@ public class FireCtrl : MonoBehaviour
         {
             if (!runningGun.isRunning)
             {
-                if (weaponChange.isHaveM4A1)
+                if (weaponChange.HasM4A1)
                     StartCoroutine(Jum4Fire());
                 else
                     Fire();
@@ -79,23 +82,25 @@ public class FireCtrl : MonoBehaviour
         bullet.SetActive(true);
     }
 
+    #region Reload Method
     void Reload()
     {
-        if (bulletCount == 10 && reloadDelay == null)
-            reloadDelay = StartCoroutine(ReloadDelay());
+        if (bulletCount == 10 && !isReloading)
+            StartCoroutine(ReloadDelay());
     }
 
     IEnumerator ReloadDelay()
     {
-        if (isReloading) yield break;
         isReloading = true;
-        yield return new WaitForSeconds(reloadTime);
+
+        yield return _wfsReload0;
         combatAni.Stop("fire");
         combatAni.CrossFade("pump1", 0.3f); // 앞선 애니메이션과 지금하려는 애니메이션을 0.3초간 겹치게 하여
                                             // 부드러운 애니메이션, 즉 블렌드 애니메이션을 만들기 위함
         bulletCount = 0;
-        yield return new WaitForSeconds(0.8f);
-        reloadDelay = null;
+        yield return _wfsReload1;
+
         isReloading = false;
     }
+    #endregion
 }

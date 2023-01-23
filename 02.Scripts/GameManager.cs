@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Text;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -20,15 +21,11 @@ public class GameManager : MonoBehaviour
     [SerializeField][Range(0.1f, 10f)]
     float responTime;
     float timePrev;
-    [SerializeField]
-    Text killText;
+    [SerializeField] Text killText;
     
-    [SerializeField]
-    int zombieMaxCnt;
-    [SerializeField]
-    int monsterMaxCnt;
-    [SerializeField]
-    int skeletonMaxCnt;
+    [SerializeField] int zombieMaxCnt;
+    [SerializeField] int monsterMaxCnt;
+    [SerializeField] int skeletonMaxCnt;
 
     void Start()
     {
@@ -52,8 +49,6 @@ public class GameManager : MonoBehaviour
 
     void CreateObject(string prefabName)
     {
-        //var navPosition = Algorithm.Navigation.GetRandomPointOnNavMesh(Vector3.zero, 50f);
-        
         int idx = Random.Range(0, points.Length);
         var obj = PoolManager.instance.Get(prefabName);
         obj.transform.position = points[idx].position;
@@ -63,6 +58,6 @@ public class GameManager : MonoBehaviour
     public void KillCount(int count)
     {
         total += count;
-        killText.text = "Kills: " + "<color=#ff0000>" + total.ToString() + "</color>";
+        killText.text = $"Kills: <color=#ff0000>{total}</color>";
     }
 }

@@ -4,30 +4,23 @@ using UnityEngine;
 
 public class RunningGun : MonoBehaviour
 {
-    public Animation combatAni;
-    public bool isRunning = false;
+    public bool isRunning { get; private set; } = false;
 
-    FireCtrl fireCtrl;
+    [SerializeField] Animation _combatAnimation;
+    [SerializeField] FireCtrl _fireCtrl;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        fireCtrl = GetComponent<FireCtrl>();
-    }
-
-    // Update is called once per frame
     void FixedUpdate()
     {
-        if (fireCtrl.isReloading) return;
+        if (_fireCtrl.isReloading) return;
 
         if (Input.GetKey(KeyCode.LeftShift) && Input.GetKey(KeyCode.W))
         {
-            combatAni.Play("running");
+            _combatAnimation.Play("running");
             isRunning = true;
         }
         else if (Input.GetKeyUp(KeyCode.LeftShift))
         {
-            combatAni.Play("runStop");
+            _combatAnimation.Play("runStop");
             isRunning = false;
         }
     }

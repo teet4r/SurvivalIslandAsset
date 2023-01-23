@@ -5,32 +5,28 @@ using UnityEngine.UI;
 
 public class Crosshair : MonoBehaviour
 {
-    Transform tr;
-    Image crosshair;
+    public bool isGazing { get; set; } = false;
+    public static Crosshair instance = null;
+    
+    [SerializeField] Image crosshair;
+    [SerializeField] float duration;
+    [SerializeField] float minSize;
+    [SerializeField] float maxSize;
 
     float startTime;
-
-    [SerializeField]
-    float duration;
-    [SerializeField]
-    float minSize;
-    [SerializeField]
-    float maxSize;
-
     Color originColor = new Color(1f, 1f, 1f, 0.8f);
     Color gazingColor = Color.red;
-
-    public bool isGazing = false;
-    public static Crosshair instance;
+    
+    void Awake()
+    {
+        instance = this;
+    }
 
     void Start()
     {
-        tr = GetComponent<Transform>();
-        crosshair = GetComponent<Image>();
         startTime = Time.time;
-        tr.localScale = Vector3.one * minSize;
+        transform.localScale = Vector3.one * minSize;
         crosshair.color = originColor;
-        instance = this;
     }
 
     void Update()
@@ -38,12 +34,12 @@ public class Crosshair : MonoBehaviour
         if (isGazing)
         {
             float t = (Time.time - startTime) / duration;
-            tr.localScale = Vector3.one * Mathf.Lerp(minSize, maxSize, t); // 보간함수
+            transform.localScale = Vector3.one * Mathf.Lerp(minSize, maxSize, t); // 보간함수
             crosshair.color = gazingColor;
         }
         else
         {
-            tr.localScale = Vector3.one * minSize;
+            transform.localScale = Vector3.one * minSize;
             crosshair.color = originColor;
             startTime = Time.time;
         }

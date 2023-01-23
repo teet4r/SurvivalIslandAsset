@@ -10,6 +10,6 @@ public class FinalScore : MonoBehaviour
 
     void Start()
     {
-        killText.text = "Kill :" + "<color=#ff0000>" + GameManager.instance.total.ToString()+ "</color>";
+        killText.text = $"Kill: <color=#ff0000>{GameManager.instance.total}</color>";
     }
 }
