@@ -50,7 +50,7 @@ public class GameManager : MonoBehaviour
     void CreateObject(string prefabName)
     {
         int idx = Random.Range(0, points.Length);
-        var obj = PoolManager.instance.Get(prefabName);
+        var obj = PoolManager.Instance.Get(prefabName);
         obj.transform.position = points[idx].position;
         obj.SetActive(true);
     }

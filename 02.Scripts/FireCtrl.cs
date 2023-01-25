@@ -76,7 +76,7 @@ public class FireCtrl : MonoBehaviour
 
     void _MakeBullet()
     {
-        var bullet = PoolManager.instance.Get("Bullet");
+        var bullet = PoolManager.Instance.Get("Bullet");
         bullet.transform.position = firePos.position;
         bullet.transform.rotation = firePos.rotation;
         bullet.SetActive(true);

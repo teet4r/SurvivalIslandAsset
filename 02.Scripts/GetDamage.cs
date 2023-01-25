@@ -6,33 +6,20 @@ using UnityEngine.UI;
 
 public class GetDamage : MonoBehaviour
 {
-    NavMeshAgent navMeshAgent;
-    Animator animator;
-    AudioSource audioSource;
-    Controller controller;
+    [SerializeField] Animator animator;
+    [SerializeField] NavMeshAgent navMeshAgent;
 
     const string bulletTag = "Bullet";
 
-    [SerializeField]
-    [Range(1, 1000)]
-    int maxHp;
+    [SerializeField][Range(1, 1000)] int maxHp;
     int hp;
-    [SerializeField]
-    Collider[] weaponCollider;
+    [SerializeField] Collider[] weaponCollider;
 
     public Image hpBar;
     public Canvas hpCanvas;
     public AudioClip audioClip;
 
     public bool isDie { get; private set; }
-
-    void Awake()
-    {
-        navMeshAgent = GetComponent<NavMeshAgent>();
-        animator = GetComponent<Animator>();
-        audioSource = GetComponent<AudioSource>();
-        controller = GetComponent<Controller>();
-    }
 
     void OnEnable()
     {
@@ -64,7 +51,7 @@ public class GetDamage : MonoBehaviour
         animator.SetTrigger("IsDie");
         GetComponent<CapsuleCollider>().enabled = false;
         hpCanvas.enabled = false;
-        audioSource.PlayOneShot(audioClip);
+        SoundManager.Instance.SfxAudio.Play($"EnemyKilled{Random.Range(0, 3)}");
         GameManager.instance.KillCount(1);
         for (int i = 0; i < weaponCollider.Length; i++)
             weaponCollider[i].enabled = false;
@@ -73,16 +60,18 @@ public class GetDamage : MonoBehaviour
 
     void RemoveObject()
     {
-        PoolManager.instance.Put(gameObject);
+        PoolManager.Instance.Put(gameObject);
     }
 
     void HitAniEffect(Collision collision)
     {
-        PoolManager.instance.Put(collision.gameObject);
+        PoolManager.Instance.Put(collision.gameObject);
         navMeshAgent.isStopped = true;
         animator.SetTrigger("IsHit");
 
-        var blood = PoolManager.instance.Get("Blood");
+        // 출혈 생성
+        var blood = PoolManager.Instance.Get("Blood");
+        blood.transform.parent = transform;
         blood.transform.position = collision.transform.position;
         blood.transform.rotation = Quaternion.identity;
         blood.SetActive(true);
