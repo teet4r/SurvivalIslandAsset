@@ -29,7 +29,9 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        instance = this;
+        if (instance == null)
+            instance = this;
+
         timePrev = Time.time;
     }
 

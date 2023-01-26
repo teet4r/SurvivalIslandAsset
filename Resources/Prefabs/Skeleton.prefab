@@ -882,7 +882,7 @@ GameObject:
   - component: {fileID: 5012099227941335599}
   - component: {fileID: 5012099227941335598}
   - component: {fileID: 5012099227941335601}
-  - component: {fileID: -7074381254117485400}
+  - component: {fileID: 6005631888461673189}
   m_Layer: 9
   m_Name: Skeleton
   m_TagString: Skeleton
@@ -1007,15 +1007,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec17b55f4b8a9d74d835f5bb31f6bf36, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  navMeshAgent: {fileID: 5012099227941335599}
   animator: {fileID: 5012099227711700905}
+  navMeshAgent: {fileID: 5012099227941335599}
   maxHp: 10
   weaponCollider:
   - {fileID: 3107563453113916174}
   hpBar: {fileID: 5012099228719050357}
   hpCanvas: {fileID: 5012099227325217295}
   audioClip: {fileID: 8300000, guid: 47643987a93a28248a85dba06bf214af, type: 3}
---- !u!114 &-7074381254117485400
+--- !u!114 &6005631888461673189
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
