@@ -2,14 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RunningGun : MonoBehaviour
+public class RunningGun : CustomUpdateBehaviour
 {
     public bool isRunning { get; private set; } = false;
 
     [SerializeField] Animation _combatAnimation;
     [SerializeField] FireCtrl _fireCtrl;
 
-    void FixedUpdate()
+    public override void CustomUpdate()
     {
         if (_fireCtrl.isReloading) return;
 

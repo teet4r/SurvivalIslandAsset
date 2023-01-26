@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FireCtrl : MonoBehaviour
+public class FireCtrl : CustomUpdateBehaviour
 {
     public Animation combatAni;
     public Transform firePos;
@@ -30,7 +30,7 @@ public class FireCtrl : MonoBehaviour
         _wfsReload1 = new WaitForSeconds(0.8f);
     }
 
-    void Update()
+    public override void CustomUpdate()
     {
         // 왼쪽 버튼
         if (Input.GetMouseButtonDown(0))

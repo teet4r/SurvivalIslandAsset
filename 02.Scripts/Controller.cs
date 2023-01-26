@@ -7,7 +7,7 @@ using UnityEngine.AI;
 [RequireComponent(typeof(NavMeshAgent))]
 [RequireComponent(typeof(Transform))]
 [RequireComponent(typeof(GetDamage))]
-public class Controller : MonoBehaviour
+public class Controller : CustomUpdateBehaviour
 {
     [SerializeField] Animator _animator; // 애니메이터
     [SerializeField] NavMeshAgent _navMeshAgent; // 플레이어 추적
@@ -23,12 +23,14 @@ public class Controller : MonoBehaviour
         getDamage = GetComponent<GetDamage>();
     }
 
-    void OnEnable()
+    protected override void OnEnable()
     {
+        base.OnEnable();
+
         playerTr = GameObject.FindWithTag("Player").GetComponent<Transform>();
     }
 
-    void Update()
+    public override void CustomUpdate()
     {
         if (getDamage.isDie) return;
 
