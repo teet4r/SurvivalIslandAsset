@@ -2,14 +2,24 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RunningGun : CustomUpdateBehaviour
+public class RunningGun : MonoBehaviour, ICustomUpdate
 {
     public bool isRunning { get; private set; } = false;
 
     [SerializeField] Animation _combatAnimation;
     [SerializeField] FireCtrl _fireCtrl;
 
-    public override void CustomUpdate()
+    void OnEnable()
+    {
+        RegisterUpdate();
+    }
+
+    void OnDisable()
+    {
+        DeregisterUpdate();
+    }
+
+    public void CustomUpdate()
     {
         if (_fireCtrl.isReloading) return;
 
@@ -23,5 +33,15 @@ public class RunningGun : CustomUpdateBehaviour
             _combatAnimation.Play("runStop");
             isRunning = false;
         }
+    }
+
+    public void RegisterUpdate()
+    {
+        CustomUnityMessageManager.Instance.Register(this);
+    }
+
+    public void DeregisterUpdate()
+    {
+        CustomUnityMessageManager.Instance.Deregister(this);
     }
 }

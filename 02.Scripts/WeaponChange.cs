@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WeaponChange : CustomUpdateBehaviour
+public class WeaponChange : MonoBehaviour, ICustomUpdate
 {
     public SkinnedMeshRenderer spas12;
     public MeshRenderer[] ak47;
@@ -12,7 +12,17 @@ public class WeaponChange : CustomUpdateBehaviour
 
     public bool HasM4A1 = false;
 
-    public override void CustomUpdate()
+    void OnEnable()
+    {
+        RegisterUpdate();
+    }
+
+    void OnDisable()
+    {
+        DeregisterUpdate();
+    }
+
+    public void CustomUpdate()
     {
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
@@ -44,5 +54,15 @@ public class WeaponChange : CustomUpdateBehaviour
             for (int i = 0; i < m4a1.Length; i++)
                 m4a1[i].enabled = true;
         }
+    }
+
+    public void RegisterUpdate()
+    {
+        CustomUnityMessageManager.Instance.Register(this);
+    }
+
+    public void DeregisterUpdate()
+    {
+        CustomUnityMessageManager.Instance.Deregister(this);
     }
 }

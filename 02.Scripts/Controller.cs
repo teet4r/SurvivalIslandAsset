@@ -7,7 +7,7 @@ using UnityEngine.AI;
 [RequireComponent(typeof(NavMeshAgent))]
 [RequireComponent(typeof(Transform))]
 [RequireComponent(typeof(GetDamage))]
-public class Controller : CustomUpdateBehaviour
+public class Controller : MonoBehaviour, ICustomUpdate
 {
     [SerializeField] Animator _animator; // 애니메이터
     [SerializeField] NavMeshAgent _navMeshAgent; // 플레이어 추적
@@ -23,14 +23,19 @@ public class Controller : CustomUpdateBehaviour
         getDamage = GetComponent<GetDamage>();
     }
 
-    protected override void OnEnable()
+    void OnEnable()
     {
-        base.OnEnable();
+        RegisterUpdate();
 
         playerTr = GameObject.FindWithTag("Player").GetComponent<Transform>();
     }
 
-    public override void CustomUpdate()
+    void OnDisable()
+    {
+        DeregisterUpdate();
+    }
+
+    public void CustomUpdate()
     {
         if (getDamage.isDie) return;
 
@@ -47,5 +52,15 @@ public class Controller : CustomUpdateBehaviour
             _animator.SetBool("IsTrace", true);
             _animator.SetBool("IsAttack", false);
         }
+    }
+
+    public void RegisterUpdate()
+    {
+        CustomUnityMessageManager.Instance.Register(this);
+    }
+
+    public void DeregisterUpdate()
+    {
+        CustomUnityMessageManager.Instance.Deregister(this);
     }
 }

@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FireCtrl : CustomUpdateBehaviour
+public class FireCtrl : MonoBehaviour, ICustomUpdate
 {
     public Animation combatAni;
     public Transform firePos;
@@ -30,7 +30,17 @@ public class FireCtrl : CustomUpdateBehaviour
         _wfsReload1 = new WaitForSeconds(0.8f);
     }
 
-    public override void CustomUpdate()
+    void OnEnable()
+    {
+        RegisterUpdate();
+    }
+
+    void OnDisable()
+    {
+        DeregisterUpdate();
+    }
+
+    public void CustomUpdate()
     {
         // 왼쪽 버튼
         if (Input.GetMouseButtonDown(0))
@@ -103,4 +113,14 @@ public class FireCtrl : CustomUpdateBehaviour
         isReloading = false;
     }
     #endregion
+
+    public void RegisterUpdate()
+    {
+        CustomUnityMessageManager.Instance.Register(this);
+    }
+
+    public void DeregisterUpdate()
+    {
+        CustomUnityMessageManager.Instance.Deregister(this);
+    }
 }
