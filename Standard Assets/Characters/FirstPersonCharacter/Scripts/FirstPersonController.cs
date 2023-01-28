@@ -9,7 +9,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
 {
     [RequireComponent(typeof (CharacterController))]
     [RequireComponent(typeof (AudioSource))]
-    public class FirstPersonController : MonoBehaviour
+    public class FirstPersonController : MonoBehaviour, ICustomUpdate, ICustomFixedUpdate
     {
         [SerializeField] private bool m_IsWalking;
         [SerializeField] private float m_WalkSpeed;
@@ -43,6 +43,20 @@ namespace UnityStandardAssets.Characters.FirstPerson
         private bool m_Jumping;
         private AudioSource m_AudioSource;
 
+        void OnEnable()
+        {
+            RegisterCustomUpdate();
+            RegisterCustomFixedUpdate();
+        }
+
+
+        void OnDisable()
+        {
+            DeregisterCustomUpdate();
+            DeregisterCustomFixedUpdate();
+        }
+
+
         // Use this for initialization
         private void Start()
         {
@@ -60,7 +74,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
 
 
         // Update is called once per frame
-        private void Update()
+        public void CustomUpdate()
         {
             RotateView();
             // the jump state needs to read here to make sure it is not missed
@@ -93,7 +107,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
         }
 
 
-        private void FixedUpdate()
+        public void CustomFixedUpdate()
         {
             float speed;
             GetInput(out speed);
@@ -255,6 +269,30 @@ namespace UnityStandardAssets.Characters.FirstPerson
                 return;
             }
             body.AddForceAtPosition(m_CharacterController.velocity*0.1f, hit.point, ForceMode.Impulse);
+        }
+
+
+        public void RegisterCustomUpdate()
+        {
+            CustomUpdateManager.Instance.RegisterCustomUpdate(this);
+        }
+
+
+        public void DeregisterCustomUpdate()
+        {
+            CustomUpdateManager.Instance.DeregisterCustomUpdate(this);
+        }
+
+
+        public void RegisterCustomFixedUpdate()
+        {
+            CustomUpdateManager.Instance.RegisterCustomFixedUpdate(this);
+        }
+
+
+        public void DeregisterCustomFixedUpdate()
+        {
+            CustomUpdateManager.Instance.DeregisterCustomFixedUpdate(this);
         }
     }
 }

@@ -25,14 +25,14 @@ public class Controller : MonoBehaviour, ICustomUpdate
 
     void OnEnable()
     {
-        RegisterUpdate();
+        RegisterCustomUpdate();
 
         playerTr = GameObject.FindWithTag("Player").GetComponent<Transform>();
     }
 
     void OnDisable()
     {
-        DeregisterUpdate();
+        DeregisterCustomUpdate();
     }
 
     public void CustomUpdate()
@@ -54,13 +54,13 @@ public class Controller : MonoBehaviour, ICustomUpdate
         }
     }
 
-    public void RegisterUpdate()
+    public void RegisterCustomUpdate()
     {
-        CustomUnityMessageManager.Instance.Register(this);
+        CustomUpdateManager.Instance.RegisterCustomUpdate(this);
     }
 
-    public void DeregisterUpdate()
+    public void DeregisterCustomUpdate()
     {
-        CustomUnityMessageManager.Instance.Deregister(this);
+        CustomUpdateManager.Instance.DeregisterCustomUpdate(this);
     }
 }

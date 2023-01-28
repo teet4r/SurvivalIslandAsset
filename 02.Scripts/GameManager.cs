@@ -1,7 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System.Text;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 /// <summary>
@@ -11,7 +8,7 @@ using UnityEngine.UI;
 /// 3. 몇 초 간격으로 스폰?
 /// 4. 몇 마리 스폰?
 /// </summary>
-public class GameManager : MonoBehaviour
+public class GameManager : MonoBehaviour, ICustomUpdate
 {
     public static GameManager instance = null;
 
@@ -27,6 +24,16 @@ public class GameManager : MonoBehaviour
     [SerializeField] int monsterMaxCnt;
     [SerializeField] int skeletonMaxCnt;
 
+    void OnEnable()
+    {
+        RegisterCustomUpdate();
+    }
+
+    void OnDisable()
+    {
+        DeregisterCustomUpdate();
+    }
+
     void Start()
     {
         if (instance == null)
@@ -35,7 +42,7 @@ public class GameManager : MonoBehaviour
         timePrev = Time.time;
     }
 
-    void Update()
+    public void CustomUpdate()
     {
         if (Time.time - timePrev > responTime)
         {
@@ -61,5 +68,15 @@ public class GameManager : MonoBehaviour
     {
         total += count;
         killText.text = $"Kills: <color=#ff0000>{total}</color>";
+    }
+
+    public void RegisterCustomUpdate()
+    {
+        CustomUpdateManager.Instance.RegisterCustomUpdate(this);
+    }
+
+    public void DeregisterCustomUpdate()
+    {
+        CustomUpdateManager.Instance.DeregisterCustomUpdate(this);
     }
 }

@@ -29,15 +29,13 @@ public class FireCtrl : MonoBehaviour, ICustomUpdate
         _wfsReload0 = new WaitForSeconds(reloadTime);
         _wfsReload1 = new WaitForSeconds(0.8f);
     }
-
     void OnEnable()
     {
-        RegisterUpdate();
+        RegisterCustomUpdate();
     }
-
     void OnDisable()
     {
-        DeregisterUpdate();
+        DeregisterCustomUpdate();
     }
 
     public void CustomUpdate()
@@ -74,7 +72,6 @@ public class FireCtrl : MonoBehaviour, ICustomUpdate
         audioSource.PlayOneShot(bulletSound, 1f);
         ++bulletCount;
     }
-
     IEnumerator Jum4Fire()
     {
         for (int i = 0; i < 3; i++)
@@ -83,7 +80,6 @@ public class FireCtrl : MonoBehaviour, ICustomUpdate
             yield return new WaitForSeconds(0.1f);
         }
     }
-
     void _MakeBullet()
     {
         var bullet = PoolManager.Instance.Get("Bullet");
@@ -92,13 +88,11 @@ public class FireCtrl : MonoBehaviour, ICustomUpdate
         bullet.SetActive(true);
     }
 
-    #region Reload Method
     void Reload()
     {
         if (bulletCount == 10 && !isReloading)
             StartCoroutine(ReloadDelay());
     }
-
     IEnumerator ReloadDelay()
     {
         isReloading = true;
@@ -112,15 +106,14 @@ public class FireCtrl : MonoBehaviour, ICustomUpdate
 
         isReloading = false;
     }
-    #endregion
 
-    public void RegisterUpdate()
+    public void RegisterCustomUpdate()
     {
-        CustomUnityMessageManager.Instance.Register(this);
+        CustomUpdateManager.Instance.RegisterCustomUpdate(this);
     }
 
-    public void DeregisterUpdate()
+    public void DeregisterCustomUpdate()
     {
-        CustomUnityMessageManager.Instance.Deregister(this);
+        CustomUpdateManager.Instance.DeregisterCustomUpdate(this);
     }
 }

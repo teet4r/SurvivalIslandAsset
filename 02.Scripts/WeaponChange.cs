@@ -14,12 +14,12 @@ public class WeaponChange : MonoBehaviour, ICustomUpdate
 
     void OnEnable()
     {
-        RegisterUpdate();
+        RegisterCustomUpdate();
     }
 
     void OnDisable()
     {
-        DeregisterUpdate();
+        DeregisterCustomUpdate();
     }
 
     public void CustomUpdate()
@@ -56,13 +56,13 @@ public class WeaponChange : MonoBehaviour, ICustomUpdate
         }
     }
 
-    public void RegisterUpdate()
+    public void RegisterCustomUpdate()
     {
-        CustomUnityMessageManager.Instance.Register(this);
+        CustomUpdateManager.Instance.RegisterCustomUpdate(this);
     }
 
-    public void DeregisterUpdate()
+    public void DeregisterCustomUpdate()
     {
-        CustomUnityMessageManager.Instance.Deregister(this);
+        CustomUpdateManager.Instance.DeregisterCustomUpdate(this);
     }
 }
