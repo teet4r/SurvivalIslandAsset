@@ -2,21 +2,31 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EyeCast : MonoBehaviour
+public class EyeCast : MonoBehaviour, ICustomFixedUpdate
 {
     Transform tr;
     Ray ray;
     RaycastHit raycastHit;
-    public float dist = 15f;
+    public float dist = 50f;
+
+    void OnEnable()
+    {
+        RegisterCustomFixedUpdate();
+    }
+
+    void OnDisable()
+    {
+        DeregisterCustomFixedUpdate();
+    }
 
     void Start()
     {
         tr = GetComponent<Transform>();
     }
 
-    void Update()
+    public void CustomFixedUpdate()
     {
-        ray = new Ray(tr.position, tr.forward * dist);
+        ray = new Ray(tr.position, tr.forward);
         Debug.DrawRay(ray.origin, ray.direction * dist, Color.green);
 
         // 적이 광선에 맞았다면
@@ -25,5 +35,15 @@ public class EyeCast : MonoBehaviour
             Crosshair.instance.isGazing = true;
         else
             Crosshair.instance.isGazing = false;
+    }
+
+    public void RegisterCustomFixedUpdate()
+    {
+        CustomUpdateManager.Instance.RegisterCustomFixedUpdate(this);
+    }
+
+    public void DeregisterCustomFixedUpdate()
+    {
+        CustomUpdateManager.Instance.DeregisterCustomFixedUpdate(this);
     }
 }

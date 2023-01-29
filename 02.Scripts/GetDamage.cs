@@ -44,10 +44,20 @@ public class GetDamage : MonoBehaviour
         }
     }
 
+    public void OnDamage(Vector3 hitPoint, int damage)
+    {
+        HitFromRayAniEffect(hitPoint);
+        hp -= damage;
+        DrawHpBar();
+        if (hp <= 0)
+            Die();
+    }
+
     void Die()
     {
         if (isDie) return;
         isDie = true;
+
         animator.SetTrigger("IsDie");
         GetComponent<CapsuleCollider>().enabled = false;
         hpCanvas.enabled = false;
@@ -55,6 +65,7 @@ public class GetDamage : MonoBehaviour
         GameManager.instance.KillCount(1);
         for (int i = 0; i < weaponCollider.Length; i++)
             weaponCollider[i].enabled = false;
+
         Invoke("RemoveObject", 3f);
     }
 
@@ -73,6 +84,18 @@ public class GetDamage : MonoBehaviour
         var blood = PoolManager.Instance.Get("Blood");
         blood.transform.parent = transform;
         blood.transform.position = collision.transform.position;
+        blood.transform.rotation = Quaternion.identity;
+        blood.SetActive(true);
+    }
+    void HitFromRayAniEffect(Vector3 hitPoint)
+    {
+        navMeshAgent.isStopped = true;
+        animator.SetTrigger("IsHit");
+
+        // 출혈 생성
+        var blood = PoolManager.Instance.Get("Blood");
+        blood.transform.parent = transform;
+        blood.transform.position = hitPoint;
         blood.transform.rotation = Quaternion.identity;
         blood.SetActive(true);
     }

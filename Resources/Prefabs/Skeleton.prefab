@@ -1009,7 +1009,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animator: {fileID: 5012099227711700905}
   navMeshAgent: {fileID: 5012099227941335599}
-  maxHp: 10
+  maxHp: 20
   weaponCollider:
   - {fileID: 3107563453113916174}
   hpBar: {fileID: 5012099228719050357}

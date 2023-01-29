@@ -2234,7 +2234,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animator: {fileID: 3327754687889832613}
   navMeshAgent: {fileID: 3327754687530370028}
-  maxHp: 10
+  maxHp: 20
   weaponCollider:
   - {fileID: 5451044815732981522}
   - {fileID: 1681961972867575864}

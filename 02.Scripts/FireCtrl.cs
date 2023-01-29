@@ -13,20 +13,22 @@ public class FireCtrl : MonoBehaviour, ICustomUpdate
     public Light flashLight;
     public bool isReloading { get; private set; } = false;
 
-    RunningGun runningGun;
-    WeaponChange weaponChange;
-    int bulletCount = 0;
+    RunningGun _runningGun;
+    WeaponChange _weaponChange;
+    int _bulletCount = 0;
 
-    [SerializeField] float reloadTime;
+    int _enemyLayers = 1 << 8 | 1 << 9 | 1 << 10;
+
+    [SerializeField] float _reloadTime = 0.5f;
     WaitForSeconds _wfsReload0 = null;
     WaitForSeconds _wfsReload1 = null;
 
     void Awake()
     {
-        runningGun = GetComponent<RunningGun>();
-        weaponChange = GetComponent<WeaponChange>();
+        _runningGun = GetComponent<RunningGun>();
+        _weaponChange = GetComponent<WeaponChange>();
 
-        _wfsReload0 = new WaitForSeconds(reloadTime);
+        _wfsReload0 = new WaitForSeconds(_reloadTime);
         _wfsReload1 = new WaitForSeconds(0.8f);
     }
     void OnEnable()
@@ -43,12 +45,12 @@ public class FireCtrl : MonoBehaviour, ICustomUpdate
         // 왼쪽 버튼
         if (Input.GetMouseButtonDown(0))
         {
-            if (!runningGun.isRunning)
+            if (!_runningGun.isRunning)
             {
-                if (weaponChange.HasM4A1)
+                if (_weaponChange.HasM4A1)
                     StartCoroutine(Jum4Fire());
                 else
-                    Fire();
+                    _Fire();
             }
         }
 
@@ -59,26 +61,41 @@ public class FireCtrl : MonoBehaviour, ICustomUpdate
             audioSource.PlayOneShot(flashSound, 1f);
         }
 
-        Reload();
+        _Reload();
     }
 
-    void Fire()
+    void _Fire()
     {
         if (isReloading) return;
 
-        _MakeBullet();
+        _MakeBulletTrailer();
+        //_MakeBullet();
 
         combatAni.Play("fire");
         audioSource.PlayOneShot(bulletSound, 1f);
-        ++bulletCount;
+        ++_bulletCount;
     }
     IEnumerator Jum4Fire()
     {
         for (int i = 0; i < 3; i++)
         {
-            Fire();
+            _Fire();
             yield return new WaitForSeconds(0.1f);
         }
+    }
+
+    void _MakeBulletTrailer()
+    {
+        var bulletTracer = PoolManager.Instance.Get("BulletTracer").GetComponent<LineRenderer>();
+        if (Physics.Raycast(firePos.position, firePos.forward, out RaycastHit _raycastHit, 50f, _enemyLayers))
+        {
+            if (_raycastHit.transform.TryGetComponent(out GetDamage getDamage))
+                getDamage.OnDamage(_raycastHit.point, 10);
+            bulletTracer.SetPositions(new Vector3[] { firePos.position, _raycastHit.point });
+        }
+        else
+            bulletTracer.SetPositions(new Vector3[] { firePos.position, firePos.forward * 50f });
+        bulletTracer.gameObject.SetActive(true);
     }
     void _MakeBullet()
     {
@@ -88,12 +105,12 @@ public class FireCtrl : MonoBehaviour, ICustomUpdate
         bullet.SetActive(true);
     }
 
-    void Reload()
+    void _Reload()
     {
-        if (bulletCount == 10 && !isReloading)
-            StartCoroutine(ReloadDelay());
+        if (_bulletCount == 10 && !isReloading)
+            StartCoroutine(_ReloadDelay());
     }
-    IEnumerator ReloadDelay()
+    IEnumerator _ReloadDelay()
     {
         isReloading = true;
 
@@ -101,7 +118,7 @@ public class FireCtrl : MonoBehaviour, ICustomUpdate
         combatAni.Stop("fire");
         combatAni.CrossFade("pump1", 0.3f); // 앞선 애니메이션과 지금하려는 애니메이션을 0.3초간 겹치게 하여
                                             // 부드러운 애니메이션, 즉 블렌드 애니메이션을 만들기 위함
-        bulletCount = 0;
+        _bulletCount = 0;
         yield return _wfsReload1;
 
         isReloading = false;

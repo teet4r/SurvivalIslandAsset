@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Crosshair : MonoBehaviour
+public class Crosshair : MonoBehaviour, ICustomUpdate
 {
     public bool isGazing { get; set; } = false;
     public static Crosshair instance = null;
@@ -22,6 +22,16 @@ public class Crosshair : MonoBehaviour
         instance = this;
     }
 
+    void OnEnable()
+    {
+        RegisterCustomUpdate();
+    }
+
+    void OnDisable()
+    {
+        DeregisterCustomUpdate();
+    }
+
     void Start()
     {
         startTime = Time.time;
@@ -29,7 +39,7 @@ public class Crosshair : MonoBehaviour
         crosshair.color = originColor;
     }
 
-    void Update()
+    public void CustomUpdate()
     {
         if (isGazing)
         {
@@ -43,5 +53,15 @@ public class Crosshair : MonoBehaviour
             crosshair.color = originColor;
             startTime = Time.time;
         }
+    }
+
+    public void RegisterCustomUpdate()
+    {
+        CustomUpdateManager.Instance.RegisterCustomUpdate(this);
+    }
+
+    public void DeregisterCustomUpdate()
+    {
+        CustomUpdateManager.Instance.DeregisterCustomUpdate(this);
     }
 }

@@ -1662,9 +1662,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec17b55f4b8a9d74d835f5bb31f6bf36, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  navMeshAgent: {fileID: 3465197723860512192}
   animator: {fileID: 3465197723867830434}
-  maxHp: 10
+  navMeshAgent: {fileID: 3465197723860512192}
+  maxHp: 20
   weaponCollider:
   - {fileID: 7901594832890338871}
   - {fileID: 2652461377557127430}

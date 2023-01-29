@@ -326,7 +326,7 @@ MonoBehaviour:
   bulletSound: {fileID: 8300000, guid: e432152978959be43b921689dec82efc, type: 3}
   flashSound: {fileID: 8300000, guid: e47032c6caf040e4183944ac3f21d4b5, type: 3}
   flashLight: {fileID: 1628955816}
-  reloadTime: 0.5
+  _reloadTime: 0.5
 --- !u!114 &1595173072
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -364,7 +364,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hpBar: {fileID: 0}
   hpText: {fileID: 0}
-  maxHp: 100
+  maxHp: 200
   screenPanel: {fileID: 0}
 --- !u!1 &100002
 GameObject:
@@ -475,7 +475,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cce81359da0956b44b132c53a1272c0e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dist: 15
+  dist: 50
 --- !u!1 &787288281
 GameObject:
   m_ObjectHideFlags: 0
