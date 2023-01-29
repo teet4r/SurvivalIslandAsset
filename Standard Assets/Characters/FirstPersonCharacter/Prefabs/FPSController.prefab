@@ -326,6 +326,7 @@ MonoBehaviour:
   bulletSound: {fileID: 8300000, guid: e432152978959be43b921689dec82efc, type: 3}
   flashSound: {fileID: 8300000, guid: e47032c6caf040e4183944ac3f21d4b5, type: 3}
   flashLight: {fileID: 1628955816}
+  _bulletCountToReload: 20
   _reloadTime: 0.5
 --- !u!114 &1595173072
 MonoBehaviour:

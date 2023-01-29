@@ -27,7 +27,7 @@ public class EyeCast : MonoBehaviour, ICustomFixedUpdate
     public void CustomFixedUpdate()
     {
         ray = new Ray(tr.position, tr.forward);
-        Debug.DrawRay(ray.origin, ray.direction * dist, Color.green);
+        //Debug.DrawRay(ray.origin, ray.direction * dist, Color.green);
 
         // 적이 광선에 맞았다면
         // out: 함수 안에서 변경된 값을 밖으로 꺼내옴

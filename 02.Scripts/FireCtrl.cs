@@ -15,13 +15,14 @@ public class FireCtrl : MonoBehaviour, ICustomUpdate
 
     RunningGun _runningGun;
     WeaponChange _weaponChange;
-    int _bulletCount = 0;
 
     int _enemyLayers = 1 << 8 | 1 << 9 | 1 << 10;
 
+    [SerializeField] int _bulletCountToReload = 20;
     [SerializeField] float _reloadTime = 0.5f;
     WaitForSeconds _wfsReload0 = null;
     WaitForSeconds _wfsReload1 = null;
+    int _bulletCount = 0;
 
     void Awake()
     {
@@ -53,22 +54,23 @@ public class FireCtrl : MonoBehaviour, ICustomUpdate
                     _Fire();
             }
         }
-
         // flash on/off
-        if (Input.GetKeyDown(KeyCode.F))
+        else if (Input.GetKeyDown(KeyCode.F))
         {
             flashLight.enabled = !flashLight.enabled;
             audioSource.PlayOneShot(flashSound, 1f);
         }
+        else if (Input.GetKeyDown(KeyCode.R) || _bulletCount >= _bulletCountToReload)
+            _Reload();
 
-        _Reload();
+        //Debug.DrawRay(firePos.position, firePos.forward * 50f);
     }
 
     void _Fire()
     {
         if (isReloading) return;
 
-        _MakeBulletTrailer();
+        _MakeBulletTracer();
         //_MakeBullet();
 
         combatAni.Play("fire");
@@ -84,7 +86,7 @@ public class FireCtrl : MonoBehaviour, ICustomUpdate
         }
     }
 
-    void _MakeBulletTrailer()
+    void _MakeBulletTracer()
     {
         var bulletTracer = PoolManager.Instance.Get("BulletTracer").GetComponent<LineRenderer>();
         if (Physics.Raycast(firePos.position, firePos.forward, out RaycastHit _raycastHit, 50f, _enemyLayers))
@@ -94,7 +96,7 @@ public class FireCtrl : MonoBehaviour, ICustomUpdate
             bulletTracer.SetPositions(new Vector3[] { firePos.position, _raycastHit.point });
         }
         else
-            bulletTracer.SetPositions(new Vector3[] { firePos.position, firePos.forward * 50f });
+            bulletTracer.SetPositions(new Vector3[] { firePos.position, firePos.position + firePos.forward * 50f });
         bulletTracer.gameObject.SetActive(true);
     }
     void _MakeBullet()
@@ -107,7 +109,7 @@ public class FireCtrl : MonoBehaviour, ICustomUpdate
 
     void _Reload()
     {
-        if (_bulletCount == 10 && !isReloading)
+        if (!isReloading)
             StartCoroutine(_ReloadDelay());
     }
     IEnumerator _ReloadDelay()
@@ -128,7 +130,6 @@ public class FireCtrl : MonoBehaviour, ICustomUpdate
     {
         CustomUpdateManager.Instance.RegisterCustomUpdate(this);
     }
-
     public void DeregisterCustomUpdate()
     {
         CustomUpdateManager.Instance.DeregisterCustomUpdate(this);
