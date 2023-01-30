@@ -19,24 +19,24 @@ public class Crosshair : MonoBehaviour, ICustomUpdate
     
     void Awake()
     {
-        instance = this;
+        if (instance == null)
+            instance = this;
+        else
+            Destroy(gameObject);
     }
-
     void OnEnable()
     {
         RegisterCustomUpdate();
     }
-
-    void OnDisable()
-    {
-        DeregisterCustomUpdate();
-    }
-
     void Start()
     {
         startTime = Time.time;
         transform.localScale = Vector3.one * minSize;
         crosshair.color = originColor;
+    }
+    void OnDisable()
+    {
+        DeregisterCustomUpdate();
     }
 
     public void CustomUpdate()
@@ -54,12 +54,10 @@ public class Crosshair : MonoBehaviour, ICustomUpdate
             startTime = Time.time;
         }
     }
-
     public void RegisterCustomUpdate()
     {
         CustomUpdateManager.Instance.RegisterCustomUpdate(this);
     }
-
     public void DeregisterCustomUpdate()
     {
         CustomUpdateManager.Instance.DeregisterCustomUpdate(this);

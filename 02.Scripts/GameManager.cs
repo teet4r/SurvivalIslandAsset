@@ -21,19 +21,16 @@ public class GameManager : MonoBehaviour, ICustomUpdate
     [SerializeField] Text killText;
     
     [SerializeField] int zombieMaxCnt;
+    int _zombieCurCnt = 0;
     [SerializeField] int monsterMaxCnt;
+    int _monsterCurCnt = 0;
     [SerializeField] int skeletonMaxCnt;
+    int _skeletonCurCnt = 0;
 
     void OnEnable()
     {
         RegisterCustomUpdate();
     }
-
-    void OnDisable()
-    {
-        DeregisterCustomUpdate();
-    }
-
     void Start()
     {
         if (instance == null)
@@ -41,29 +38,32 @@ public class GameManager : MonoBehaviour, ICustomUpdate
 
         timePrev = Time.time;
     }
+    void OnDisable()
+    {
+        DeregisterCustomUpdate();
+    }
 
     public void CustomUpdate()
     {
         if (Time.time - timePrev > responTime)
         {
             timePrev = Time.time;
-            if (GameObject.FindGameObjectsWithTag("Zombie").Length < zombieMaxCnt)
-                CreateObject("Zombie");
-            if (GameObject.FindGameObjectsWithTag("Monster").Length < monsterMaxCnt)
-                CreateObject("Monster");
-            if (GameObject.FindGameObjectsWithTag("Skeleton").Length < skeletonMaxCnt)
-                CreateObject("Skeleton");
+            if (_zombieCurCnt < zombieMaxCnt)
+                CreateObject("Zombie", ref _zombieCurCnt);
+            if (_monsterCurCnt < monsterMaxCnt)
+                CreateObject("Monster", ref _monsterCurCnt);
+            if (_skeletonCurCnt < skeletonMaxCnt)
+                CreateObject("Skeleton", ref _skeletonCurCnt);
         }
     }
-
-    void CreateObject(string prefabName)
+    void CreateObject(string prefabName, ref int count)
     {
         int idx = Random.Range(0, points.Length);
         var obj = PoolManager.Instance.Get(prefabName);
         obj.transform.position = points[idx].position;
         obj.SetActive(true);
+        count++;
     }
-
     public void KillCount(int count)
     {
         total += count;
@@ -74,7 +74,6 @@ public class GameManager : MonoBehaviour, ICustomUpdate
     {
         CustomUpdateManager.Instance.RegisterCustomUpdate(this);
     }
-
     public void DeregisterCustomUpdate()
     {
         CustomUpdateManager.Instance.DeregisterCustomUpdate(this);

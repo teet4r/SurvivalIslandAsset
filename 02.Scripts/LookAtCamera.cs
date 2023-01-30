@@ -1,20 +1,35 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics.Contracts;
 using UnityEngine;
 
-public class LookAtCamera : MonoBehaviour
+public class LookAtCamera : MonoBehaviour, ICustomUpdate
 {
-    Transform canvasTr;
-    Transform cameraTr;
+    Transform _canvasTr;
+    Transform _cameraTr;
 
-    void Start()
+    void OnEnable()
     {
-        canvasTr = GetComponent<Transform>();
-        cameraTr = Camera.main.transform;
+        _canvasTr = GetComponent<Transform>();
+        _cameraTr = Camera.main.transform;
+        
+        RegisterCustomUpdate();
+    }
+    void OnDisable()
+    {
+        DeregisterCustomUpdate();
     }
 
-    void Update()
+    public void CustomUpdate()
     {
-        canvasTr.LookAt(cameraTr);
+        _canvasTr.LookAt(_cameraTr);
+    }
+    public void DeregisterCustomUpdate()
+    {
+        CustomUpdateManager.Instance.DeregisterCustomUpdate(this);
+    }
+    public void RegisterCustomUpdate()
+    {
+        CustomUpdateManager.Instance.RegisterCustomUpdate(this);
     }
 }

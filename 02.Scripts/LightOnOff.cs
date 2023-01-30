@@ -14,7 +14,7 @@ public class LightOnOff : MonoBehaviour
         if (other.tag.Equals("Player"))
         {
             inLight.enabled = true;
-            source.PlayOneShot(onSound, 1f);
+            SoundManager.Instance.SfxAudio.Play("LightOn");
         }
     }
     void OnTriggerExit(Collider other)
@@ -22,7 +22,7 @@ public class LightOnOff : MonoBehaviour
         if (other.tag.Equals("Player"))
         {
             inLight.enabled = false;
-            source.PlayOneShot(offSound, 1f);
+            SoundManager.Instance.SfxAudio.Play("LightOff");
         }
     }
 }

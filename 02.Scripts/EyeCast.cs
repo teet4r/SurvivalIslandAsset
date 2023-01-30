@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class EyeCast : MonoBehaviour, ICustomFixedUpdate
 {
-    Transform tr;
+    [SerializeField] float _dist = 50f;
+
     Ray ray;
     RaycastHit raycastHit;
-    public float dist = 50f;
 
     void OnEnable()
     {
@@ -19,19 +19,14 @@ public class EyeCast : MonoBehaviour, ICustomFixedUpdate
         DeregisterCustomFixedUpdate();
     }
 
-    void Start()
-    {
-        tr = GetComponent<Transform>();
-    }
-
     public void CustomFixedUpdate()
     {
-        ray = new Ray(tr.position, tr.forward);
+        ray = new Ray(transform.position, transform.forward);
         //Debug.DrawRay(ray.origin, ray.direction * dist, Color.green);
 
         // 적이 광선에 맞았다면
         // out: 함수 안에서 변경된 값을 밖으로 꺼내옴
-        if (Physics.Raycast(ray, out raycastHit, dist, 1 << 8 | 1 << 9 | 1 << 10))
+        if (Physics.Raycast(ray, out raycastHit, _dist, 1 << 8 | 1 << 9 | 1 << 10))
             Crosshair.instance.isGazing = true;
         else
             Crosshair.instance.isGazing = false;

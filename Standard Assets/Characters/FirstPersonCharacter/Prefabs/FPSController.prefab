@@ -323,8 +323,6 @@ MonoBehaviour:
   combatAni: {fileID: 1149537306}
   firePos: {fileID: 787288282}
   audioSource: {fileID: 8200000}
-  bulletSound: {fileID: 8300000, guid: e432152978959be43b921689dec82efc, type: 3}
-  flashSound: {fileID: 8300000, guid: e47032c6caf040e4183944ac3f21d4b5, type: 3}
   flashLight: {fileID: 1628955816}
   _bulletCountToReload: 20
   _reloadTime: 0.5
@@ -377,7 +375,6 @@ GameObject:
   m_Component:
   - component: {fileID: 400002}
   - component: {fileID: 2000000}
-  - component: {fileID: 8100000}
   - component: {fileID: 12474086}
   - component: {fileID: 323138346}
   m_Layer: 0
@@ -448,14 +445,6 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
---- !u!81 &8100000
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 100002}
-  m_Enabled: 1
 --- !u!124 &12474086
 Behaviour:
   m_ObjectHideFlags: 0
@@ -476,7 +465,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cce81359da0956b44b132c53a1272c0e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dist: 50
+  _dist: 50
 --- !u!1 &787288281
 GameObject:
   m_ObjectHideFlags: 0
@@ -617,7 +606,7 @@ GameObject:
   - component: {fileID: 1628955815}
   - component: {fileID: 1628955816}
   m_Layer: 0
-  m_Name: Flash_Light
+  m_Name: FlashLight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -799,7 +788,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1970909158}
   - component: {fileID: 1970909160}
-  - component: {fileID: 1970909159}
   m_Layer: 0
   m_Name: MiniMapCamera
   m_TagString: Untagged
@@ -864,14 +852,6 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
---- !u!81 &1970909159
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1970909157}
-  m_Enabled: 0
 --- !u!1001 &1143853946
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -945,15 +925,15 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1143853946}
   m_PrefabAsset: {fileID: 0}
---- !u!4 &1143720342 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 400108, guid: 3c0d61a63f63c2748b2b89b0f5560f5d,
-    type: 3}
-  m_PrefabInstance: {fileID: 1143853946}
-  m_PrefabAsset: {fileID: 0}
 --- !u!137 &1157421272 stripped
 SkinnedMeshRenderer:
   m_CorrespondingSourceObject: {fileID: 13700002, guid: 3c0d61a63f63c2748b2b89b0f5560f5d,
+    type: 3}
+  m_PrefabInstance: {fileID: 1143853946}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &1143720342 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 400108, guid: 3c0d61a63f63c2748b2b89b0f5560f5d,
     type: 3}
   m_PrefabInstance: {fileID: 1143853946}
   m_PrefabAsset: {fileID: 0}

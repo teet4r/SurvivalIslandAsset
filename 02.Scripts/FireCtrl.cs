@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections;
 using UnityEngine;
 
 public class FireCtrl : MonoBehaviour, ICustomUpdate
@@ -8,8 +6,6 @@ public class FireCtrl : MonoBehaviour, ICustomUpdate
     public Animation combatAni;
     public Transform firePos;
     public AudioSource audioSource;
-    public AudioClip bulletSound;
-    public AudioClip flashSound;
     public Light flashLight;
     public bool isReloading { get; private set; } = false;
 
@@ -58,7 +54,7 @@ public class FireCtrl : MonoBehaviour, ICustomUpdate
         else if (Input.GetKeyDown(KeyCode.F))
         {
             flashLight.enabled = !flashLight.enabled;
-            audioSource.PlayOneShot(flashSound, 1f);
+            SoundManager.Instance.SfxAudio.Play("Flash");
         }
         else if (Input.GetKeyDown(KeyCode.R) || _bulletCount >= _bulletCountToReload)
             _Reload();
@@ -74,7 +70,7 @@ public class FireCtrl : MonoBehaviour, ICustomUpdate
         //_MakeBullet();
 
         combatAni.Play("fire");
-        audioSource.PlayOneShot(bulletSound, 1f);
+        SoundManager.Instance.SfxAudio.Play("Gun");
         ++_bulletCount;
     }
     IEnumerator Jum4Fire()
