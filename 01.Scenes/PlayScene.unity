@@ -1914,9 +1914,9 @@ MonoBehaviour:
   - {fileID: 1476487888}
   responTime: 0.5
   killText: {fileID: 511997011}
-  zombieMaxCnt: 1
-  monsterMaxCnt: 1
-  skeletonMaxCnt: 1
+  zombieMaxCnt: 20
+  monsterMaxCnt: 20
+  skeletonMaxCnt: 20
 --- !u!1 &792490523
 GameObject:
   m_ObjectHideFlags: 0
@@ -2173,10 +2173,10 @@ RectTransform:
   m_Father: {fileID: 404882126}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -40}
-  m_SizeDelta: {x: 950, y: 550}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &836461059
 MonoBehaviour:

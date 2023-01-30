@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 /// <summary>
@@ -27,6 +28,8 @@ public class GameManager : MonoBehaviour, ICustomUpdate
     [SerializeField] int skeletonMaxCnt;
     int _skeletonCurCnt = 0;
 
+    bool _isGameOver = false;
+
     void OnEnable()
     {
         RegisterCustomUpdate();
@@ -45,6 +48,8 @@ public class GameManager : MonoBehaviour, ICustomUpdate
 
     public void CustomUpdate()
     {
+        if (_isGameOver) return;
+
         if (Time.time - timePrev > responTime)
         {
             timePrev = Time.time;
@@ -55,6 +60,17 @@ public class GameManager : MonoBehaviour, ICustomUpdate
             if (_skeletonCurCnt < skeletonMaxCnt)
                 CreateObject("Skeleton", ref _skeletonCurCnt);
         }
+
+        if (total >= zombieMaxCnt + monsterMaxCnt + skeletonMaxCnt)
+        {
+            _isGameOver = true;
+            Invoke("LoadNextScene", 3f);
+        }
+    }
+    public void KillCount(int count)
+    {
+        total += count;
+        killText.text = $"Kills: <color=#ff0000>{total}</color>";
     }
     void CreateObject(string prefabName, ref int count)
     {
@@ -64,10 +80,9 @@ public class GameManager : MonoBehaviour, ICustomUpdate
         obj.SetActive(true);
         count++;
     }
-    public void KillCount(int count)
+    void LoadNextScene()
     {
-        total += count;
-        killText.text = $"Kills: <color=#ff0000>{total}</color>";
+        SceneManager.LoadScene("EndScene");
     }
 
     public void RegisterCustomUpdate()

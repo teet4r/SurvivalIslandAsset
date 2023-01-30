@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UI;
 
@@ -31,7 +29,6 @@ public class GetDamage : MonoBehaviour
         for (int i = 0; i < weaponCollider.Length; i++)
             weaponCollider[i].enabled = true;
     }
-
     void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.tag.Equals(bulletTag))
@@ -68,12 +65,10 @@ public class GetDamage : MonoBehaviour
 
         Invoke("RemoveObject", 3f);
     }
-
     void RemoveObject()
     {
         PoolManager.Instance.Put(gameObject);
     }
-
     void HitAniEffect(Collision collision)
     {
         PoolManager.Instance.Put(collision.gameObject);
@@ -99,7 +94,6 @@ public class GetDamage : MonoBehaviour
         blood.transform.rotation = Quaternion.identity;
         blood.SetActive(true);
     }
-
     void DrawHpBar()
     {
         hpBar.fillAmount = (float)hp / maxHp;
