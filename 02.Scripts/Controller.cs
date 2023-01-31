@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.AI;
 
 [RequireComponent(typeof(Animator))]
@@ -27,7 +25,7 @@ public class Controller : MonoBehaviour, ICustomUpdate
     {
         RegisterCustomUpdate();
 
-        playerTr = GameObject.FindWithTag("Player").GetComponent<Transform>();
+        playerTr = GameObject.FindWithTag("Player").transform;
     }
 
     void OnDisable()
@@ -53,12 +51,10 @@ public class Controller : MonoBehaviour, ICustomUpdate
             _animator.SetBool("IsAttack", false);
         }
     }
-
     public void RegisterCustomUpdate()
     {
         CustomUpdateManager.Instance.RegisterCustomUpdate(this);
     }
-
     public void DeregisterCustomUpdate()
     {
         CustomUpdateManager.Instance.DeregisterCustomUpdate(this);

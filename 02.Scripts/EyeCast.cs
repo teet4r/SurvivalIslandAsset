@@ -13,7 +13,6 @@ public class EyeCast : MonoBehaviour, ICustomFixedUpdate
     {
         RegisterCustomFixedUpdate();
     }
-
     void OnDisable()
     {
         DeregisterCustomFixedUpdate();
@@ -31,12 +30,10 @@ public class EyeCast : MonoBehaviour, ICustomFixedUpdate
         else
             Crosshair.instance.isGazing = false;
     }
-
     public void RegisterCustomFixedUpdate()
     {
         CustomUpdateManager.Instance.RegisterCustomFixedUpdate(this);
     }
-
     public void DeregisterCustomFixedUpdate()
     {
         CustomUpdateManager.Instance.DeregisterCustomFixedUpdate(this);
