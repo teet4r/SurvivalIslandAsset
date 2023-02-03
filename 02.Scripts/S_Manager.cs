@@ -13,11 +13,6 @@ public class S_Manager : MonoBehaviour
         // 마우스 커서 숨기기
         //Cursor.visible = false;
         //Cursor.lockState = CursorLockMode.Locked;
-
-        ResourceManager.Instance.Create();
-        PoolManager.Instance.Create();
-        SoundManager.Instance.Create();
-        CustomUpdateManager.Instance.Create();
     }
 
     public void PlayGame()

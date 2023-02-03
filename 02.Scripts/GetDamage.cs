@@ -15,7 +15,7 @@ public class GetDamage : MonoBehaviour
 
     public Image hpBar;
     public Canvas hpCanvas;
-    public AudioClip audioClip;
+    [SerializeField] Sfx _deadSound;
 
     public bool isDie { get; private set; }
 
@@ -58,7 +58,7 @@ public class GetDamage : MonoBehaviour
         animator.SetTrigger("IsDie");
         GetComponent<CapsuleCollider>().enabled = false;
         hpCanvas.enabled = false;
-        SoundManager.Instance.SfxAudio.Play($"EnemyKilled{Random.Range(0, 3)}");
+        SoundManager.Instance.SfxAudio.Play(_deadSound);
         GameManager.instance.KillCount(1);
         for (int i = 0; i < weaponCollider.Length; i++)
             weaponCollider[i].enabled = false;
@@ -76,11 +76,11 @@ public class GetDamage : MonoBehaviour
         animator.SetTrigger("IsHit");
 
         // 출혈 생성
-        var blood = PoolManager.Instance.Get("Blood");
+        var blood = PoolManager.Instance.Get(Prefab.Blood);
         blood.transform.parent = transform;
         blood.transform.position = collision.transform.position;
         blood.transform.rotation = Quaternion.identity;
-        blood.SetActive(true);
+        blood.gameObject.SetActive(true);
     }
     void HitFromRayAniEffect(Vector3 hitPoint)
     {
@@ -88,11 +88,11 @@ public class GetDamage : MonoBehaviour
         animator.SetTrigger("IsHit");
 
         // 출혈 생성
-        var blood = PoolManager.Instance.Get("Blood");
+        var blood = PoolManager.Instance.Get(Prefab.Blood);
         blood.transform.parent = transform;
         blood.transform.position = hitPoint;
         blood.transform.rotation = Quaternion.identity;
-        blood.SetActive(true);
+        blood.gameObject.SetActive(true);
     }
     void DrawHpBar()
     {

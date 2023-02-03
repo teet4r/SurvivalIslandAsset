@@ -60,7 +60,7 @@ public class FireCtrl : MonoBehaviour, ICustomUpdate
         else if (Input.GetKeyDown(KeyCode.F))
         {
             flashLight.enabled = !flashLight.enabled;
-            SoundManager.Instance.SfxAudio.Play("Flash");
+            SoundManager.Instance.SfxAudio.Play(Sfx.Flash);
         }
         else if (Input.GetKeyDown(KeyCode.R) || _bulletCount >= _bulletCountToReload)
             _Reload();
@@ -76,7 +76,7 @@ public class FireCtrl : MonoBehaviour, ICustomUpdate
         //_MakeBullet();
 
         combatAni.Play("fire");
-        SoundManager.Instance.SfxAudio.Play("Gun");
+        SoundManager.Instance.SfxAudio.Play(Sfx.Gun);
         ++_bulletCount;
     }
     IEnumerator Jum4Fire()
@@ -90,7 +90,7 @@ public class FireCtrl : MonoBehaviour, ICustomUpdate
 
     void _MakeBulletTracer()
     {
-        var bulletTracer = PoolManager.Instance.Get("BulletTracer").GetComponent<LineRenderer>();
+        var bulletTracer = PoolManager.Instance.Get(Prefab.BulletTracer).GetComponent<LineRenderer>();
         if (Physics.Raycast(firePos.position, firePos.forward, out RaycastHit _raycastHit, 50f, _enemyLayers))
         {
             if (_raycastHit.transform.TryGetComponent(out GetDamage getDamage))
@@ -103,10 +103,10 @@ public class FireCtrl : MonoBehaviour, ICustomUpdate
     }
     void _MakeBullet()
     {
-        var bullet = PoolManager.Instance.Get("Bullet");
+        var bullet = PoolManager.Instance.Get(Prefab.Bullet);
         bullet.transform.position = firePos.position;
         bullet.transform.rotation = firePos.rotation;
-        bullet.SetActive(true);
+        bullet.gameObject.SetActive(true);
     }
 
     void _Reload()

@@ -54,11 +54,11 @@ public class GameManager : MonoBehaviour, ICustomUpdate
         {
             timePrev = Time.time;
             if (_zombieCurCnt < zombieMaxCnt)
-                CreateObject("Zombie", ref _zombieCurCnt);
+                CreateObject(Prefab.Zombie, ref _zombieCurCnt);
             if (_monsterCurCnt < monsterMaxCnt)
-                CreateObject("Monster", ref _monsterCurCnt);
+                CreateObject(Prefab.Monster, ref _monsterCurCnt);
             if (_skeletonCurCnt < skeletonMaxCnt)
-                CreateObject("Skeleton", ref _skeletonCurCnt);
+                CreateObject(Prefab.Skeleton, ref _skeletonCurCnt);
         }
 
         if (total >= zombieMaxCnt + monsterMaxCnt + skeletonMaxCnt)
@@ -72,12 +72,12 @@ public class GameManager : MonoBehaviour, ICustomUpdate
         total += count;
         killText.text = $"Kills: <color=#ff0000>{total}</color>";
     }
-    void CreateObject(string prefabName, ref int count)
+    void CreateObject(Prefab type, ref int count)
     {
         int idx = Random.Range(0, points.Length);
-        var obj = PoolManager.Instance.Get(prefabName);
+        var obj = PoolManager.Instance.Get(type);
         obj.transform.position = points[idx].position;
-        obj.SetActive(true);
+        obj.gameObject.SetActive(true);
         count++;
     }
     void LoadNextScene()

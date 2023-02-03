@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2914454692666023170}
-  - component: {fileID: 7556919891487629493}
+  - component: {fileID: 5330341575261573074}
   m_Layer: 0
   m_Name: Blood
   m_TagString: Untagged
@@ -34,7 +34,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7556919891487629493
+--- !u!114 &5330341575261573074
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -43,10 +43,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 2918193354468523274}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bb63029d5cf3cfe428e7ac37fd87e353, type: 3}
+  m_Script: {fileID: 11500000, guid: c95e06d4e9de5754caff5f75fd77c861, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _returnTime: 0.5
+  _type: 6
+  _returnTime: 1
 --- !u!1 &2918193354542064722
 GameObject:
   m_ObjectHideFlags: 0

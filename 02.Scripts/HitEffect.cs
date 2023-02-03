@@ -10,12 +10,12 @@ public class HitEffect : MonoBehaviour
         {
             var colPosition = collision.transform.position;
             PoolManager.Instance.Put(collision.gameObject);
-            SoundManager.Instance.SfxAudio.Play("BulletHit");
+            SoundManager.Instance.SfxAudio.Play(Sfx.BulletHit);
 
-            var spark = PoolManager.Instance.Get("Spark");
+            var spark = PoolManager.Instance.Get(Prefab.Spark);
             spark.transform.position = colPosition;
             spark.transform.rotation = Quaternion.identity;
-            spark.SetActive(true);
+            spark.gameObject.SetActive(true);
         }
     }
 }

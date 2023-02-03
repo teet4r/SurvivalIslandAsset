@@ -112,7 +112,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20e2f8001051eb24a9b10c08ebc8099c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  canvasTr: {fileID: 5012099227325217291}
 --- !u!1 &5012099227704265729
 GameObject:
   m_ObjectHideFlags: 0
@@ -1015,7 +1014,7 @@ MonoBehaviour:
   - {fileID: 3107563453113916174}
   hpBar: {fileID: 5012099228719050357}
   hpCanvas: {fileID: 5012099227325217295}
-  audioClip: {fileID: 8300000, guid: 47643987a93a28248a85dba06bf214af, type: 3}
+  _deadSound: 1
 --- !u!114 &6005631888461673189
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1025,9 +1024,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 5012099227704265767}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bb63029d5cf3cfe428e7ac37fd87e353, type: 3}
+  m_Script: {fileID: 11500000, guid: c95e06d4e9de5754caff5f75fd77c861, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _type: 1
   _returnTime: Infinity
 --- !u!1 &5012099227704265769
 GameObject:

@@ -112,7 +112,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20e2f8001051eb24a9b10c08ebc8099c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  canvasTr: {fileID: 3465197722332442554}
 --- !u!1 &3465197723578837874
 GameObject:
   m_ObjectHideFlags: 0
@@ -1528,7 +1527,7 @@ GameObject:
   - component: {fileID: 3465197723860512192}
   - component: {fileID: 7491815934701552450}
   - component: {fileID: 3465197723860512196}
-  - component: {fileID: 8186943360280623492}
+  - component: {fileID: 8584624888314319348}
   m_Layer: 10
   m_Name: Monster
   m_TagString: Monster
@@ -1672,7 +1671,7 @@ MonoBehaviour:
   hpBar: {fileID: 3465197724064357987}
   hpCanvas: {fileID: 3465197722332442558}
   audioClip: {fileID: 8300000, guid: 47643987a93a28248a85dba06bf214af, type: 3}
---- !u!114 &8186943360280623492
+--- !u!114 &8584624888314319348
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1681,9 +1680,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 3465197723860544290}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bb63029d5cf3cfe428e7ac37fd87e353, type: 3}
+  m_Script: {fileID: 11500000, guid: c95e06d4e9de5754caff5f75fd77c861, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _type: 0
   _returnTime: Infinity
 --- !u!1 &3465197723860544292
 GameObject:
