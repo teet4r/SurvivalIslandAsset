@@ -1670,7 +1670,7 @@ MonoBehaviour:
   - {fileID: 2652461377557127430}
   hpBar: {fileID: 3465197724064357987}
   hpCanvas: {fileID: 3465197722332442558}
-  audioClip: {fileID: 8300000, guid: 47643987a93a28248a85dba06bf214af, type: 3}
+  _deadSound: 0
 --- !u!114 &8584624888314319348
 MonoBehaviour:
   m_ObjectHideFlags: 0
