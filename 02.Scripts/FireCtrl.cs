@@ -12,7 +12,7 @@ public class FireCtrl : MonoBehaviour, ICustomUpdate
     RunningGun _runningGun;
     WeaponChange _weaponChange;
 
-    int _enemyLayers = 0;
+    int _enemyLayers = 1 << 8 | 1 << 9 | 1 << 10;
 
     [SerializeField] int _bulletCountToReload = 20;
     [SerializeField] float _reloadTime = 0.5f;
@@ -27,12 +27,6 @@ public class FireCtrl : MonoBehaviour, ICustomUpdate
 
         _wfsReload0 = new WaitForSeconds(_reloadTime);
         _wfsReload1 = new WaitForSeconds(0.8f);
-
-        _enemyLayers = TagLayerManager.Instance.GetLayers(
-            "Zombie", "Monster", "Skeleton"
-        );
-        TagLayerManager.Instance.AddTags("AAAA", "BBBB", "CCCC");
-        TagLayerManager.Instance.AddLayers("AAAA", "BBBB", "CCCC");
     }
     void OnEnable()
     {
